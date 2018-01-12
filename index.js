@@ -8,7 +8,7 @@
 * Module for authentication and authorization
 */
 var Authentication = function () {
-  var jwt = require('./jwt')
+  var jwt = require('thrust-bitcodes/jwt')
 
   var authenticationConfig = getBitcodeConfig('authentication')
   var appName = getConfig().appName

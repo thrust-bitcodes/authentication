@@ -6,10 +6,16 @@ Authentication é um *bitcode* de autenticação/autorização para [ThrustJS](h
 ## Tutorial
 
 ```javascript
-var auth = require('thrust-bitcodes/authentication')
+let server = require('http')
+let router = require('router')
+let auth   = require('authentication')
+
+router.addMiddleware(auth.validateAccess)
+
+server.createServer(8778, router)
 ```
 
-O modulo auth conterá os seguintes métodos
+O modulo authentication contém os seguintes métodos
 
 ```javascript
 /**
@@ -97,3 +103,9 @@ Exemplo:
     }
 }
 ```
+Acesse também os outros *bitcodes* utilizados no exemplo para melhor entendimento:
+
+- [thrust-bitcodes/http](https://github.com/thrust-bitcodes/http)
+- [thrust-bitcodes/authentication](https://github.com/thrust-bitcodes/authentication)
+- [thrust-bitcodes/router](https://github.com/thrust-bitcodes/router)
+

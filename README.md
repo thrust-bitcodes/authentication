@@ -23,6 +23,24 @@ router.addMiddleware(auth.validateAccess)
 server.createServer(8778, router)
 ```
 
+```javascript
+//Rota de auth
+let auth   = require('authentication')
+
+function login (params, request, response) {
+  auth.createAuthentication(params, request, response, 1, 'idDoApp', { role: 'admin'})
+}
+
+function logout (params, request, response) {
+  auth.destroyAuthentication(params, request, response)
+}
+
+exports = {
+  login: login,
+  logout: logout
+}
+```
+
 ## API
 
 ```javascript

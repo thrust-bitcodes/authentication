@@ -3,6 +3,14 @@ Authentication
 
 Authentication é um *bitcode* de autenticação/autorização para [ThrustJS](https://github.com/thrustjs/thrust) que utiliza JWT *(JSON Web Token)* como mecanismo principal.
 
+# Instalação
+
+Posicionado em um app [ThrustJS](https://github.com/thrustjs/thrust), no seu terminal:
+
+```bash
+thrust install authentication
+```
+
 ## Tutorial
 
 ```javascript

@@ -23,49 +23,49 @@ router.addMiddleware(auth.validateAccess)
 server.createServer(8778, router)
 ```
 
-O modulo authentication contém os seguintes métodos
+## API
 
 ```javascript
 /**
-* Create a valid authentication token and put it into a cookie inside response's header
-* @param {Object} params - thrust params object
-* @param {Object} request - thrust request object
-* @param {Object} response - thrust response object
-* @param {Object} userId - user id
-* @param {Object} appId - application id (note: an application name could have many application ids)
-* @param {Object} data - some additional data that will be available in each request
+* Cria um token de autenticação e o adiciona em um cookie, no header da resposta
+* @param {Object} params - Parâmetros da requisição
+* @param {Object} request - Request da requisição
+* @param {Object} response - Response da requisição
+* @param {Object} userId - Id do usuário
+* @param {Object} appId - Id da aplicação (nota: uma aplicação pode conter vários ids)
+* @param {Object} data - Dados que serão incluídos no token e disponibilizados em 'request.userData'
 * @example
 * @file login-endpoint.js
-* @code authentication.createAuthentication(request, response, 341, 'mobileApp1', {profile: 'admin'})
+* @code authentication.createAuthentication(params, request, response, 341, 'mobileApp1', {profile: 'admin'})
 */
 createAuthentication(params, request, response, userId, appId, data)
 
 /**
-* Destroy a valid authentication token if it exists
-* @param {Object} params - thrust params object
-* @param {Object} request - thrust request object
-* @param {Object} response - thrust response object
+* Destrói um autenticação caso ele exista
+* @param {Object} params - Parâmetros da requisição
+* @param {Object} request - Request da requisição
+* @param {Object} response - Response da requisição
 * @example
 * @file logout-endpoint.js
-* @code authentication.destroyAuthentication(request, response)
+* @code authentication.destroyAuthentication(params, request, response)
 */
 destroyAuthentication(params, request, response)
 
 /**
-* Middleware to be used for authentication and authorization
+* Middleware que deve ser usado para ativar o módulo de autenticação
 * @example
 * @file startup.js
-* @code http.middlewares.push(securityAuth.validateAccess) //should to be the first middleware to be pushed
+* @code router.addMiddleware(auth.validateAccess) //Nota: É recomendável que seja o primeiro middleware da aplicação
 */
 validateAccess(params, request, response)
 
 /**
-* Set a function to be called to authorize AccessToken to be renoved
+* Seta uma função a ser chamada para definir se um token expirado pode ser revalidado.
 * @example
 * @file startup.js
 * @code
 * authentication.setCanRefreshTokenFn(function(token) {
-*  var canRefresh = true //business rule using token param
+*   return true
 * })
 */
 function setCanRefreshTokenFn(newFn)

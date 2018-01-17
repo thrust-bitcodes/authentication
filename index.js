@@ -23,16 +23,17 @@ var Authentication = function () {
   }
 
   /**
-   * Create a valid authentication token and put it into a cookie inside response's header
-   * @param {Object} params - thrust params object
-   * @param {Object} request - thrust request object
-   * @param {Object} response - thrust response object
-   * @param {Object} userId - user id
-   * @param {Object} appId - application id (note: an application name could have many application ids)
-   * @param {Object} data - some additional data that will be available in each request
-   * @example
-   * authentication.createAuthentication(params, request, response, 341, 'mobileApp1', {profile: 'admin'})
-   */
+  * Cria um token de autenticação e o adiciona em um cookie, no header da resposta
+  * @param {Object} params - Parâmetros da requisição
+  * @param {Object} request - Request da requisição
+  * @param {Object} response - Response da requisição
+  * @param {Object} userId - Id do usuário
+  * @param {Object} appId - Id da aplicação (nota: uma aplicação pode conter vários ids)
+  * @param {Object} data - Dados que serão incluídos no token e disponibilizados em 'request.userData'
+  * @example
+  * @file login-endpoint.js
+  * @code authentication.createAuthentication(params, request, response, 341, 'mobileApp1', {profile: 'admin'})
+  */
   this.createAuthentication = function (params, request, response, userId, appId, data) {
     var tkn = jwt.serialize({
       // Registred Claims - RFC 7519 - JWT
@@ -52,22 +53,24 @@ var Authentication = function () {
   }
 
   /**
-   * Destroy a valid authentication token if it exists
-   * @param {Object} params - thrust params object
-   * @param {Object} request - thrust request object
-   * @param {Object} response - thrust response object
-   * @example
-   * authentication.destroyAuthentication(params, request, response)
-   */
+  * Destrói um autenticação caso ele exista
+  * @param {Object} params - Parâmetros da requisição
+  * @param {Object} request - Request da requisição
+  * @param {Object} response - Response da requisição
+  * @example
+  * @file logout-endpoint.js
+  * @code authentication.destroyAuthentication(params, request, response)
+  */
   this.destroyAuthentication = function (params, request, response) {
     setTokenIntoHeader(params, request, response, 'undefined')
   }
 
   /**
-   * Middleware to be used for authentication and authorization
-   * @example
-   * http.middlewares.push(securityAuth.validateAccess) //should to be the first middleware to be pushed
-   */
+  * Middleware que deve ser usado para ativar o módulo de autenticação
+  * @example
+  * @file startup.js
+  * @code router.addMiddleware(auth.validateAccess) //Nota: É recomendável que seja o primeiro middleware da aplicação
+  */
   this.validateAccess = function (params, request, response) {
     if (!isAuthenticatedUrl(request)) {
       return true
@@ -84,12 +87,14 @@ var Authentication = function () {
   }
 
   /**
-   * Set a function to be called to authorize AccessToken to be renoved
-   * @example
-   * authentication.setCanRefreshTokenFn(function(token) {
-   *  var canRefresh = true //business rule using token param
-   * })
-   */
+  * Seta uma função a ser chamada para definir se um token expirado pode ser revalidado.
+  * @example
+  * @file startup.js
+  * @code
+  * authentication.setCanRefreshTokenFn(function(token) {
+  *   return true
+  * })
+  */
   this.setCanRefreshTokenFn = function (newFn) {
     _canRefreshTokenFn = newFn
   }

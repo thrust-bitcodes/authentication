@@ -1,11 +1,11 @@
 Authentication
 ===============
 
-Authentication é um *bitcode* de autenticação/autorização para [ThrustJS](https://github.com/thrustjs/thrust) que utiliza JWT *(JSON Web Token)* como mecanismo principal.
+Authentication é um *bitcode* de autenticação/autorização para [thrust](https://github.com/thrustjs/thrust) que utiliza JWT *(JSON Web Token)* como mecanismo principal.
 
 # Instalação
 
-Posicionado em um app [ThrustJS](https://github.com/thrustjs/thrust), no seu terminal:
+Posicionado em um app [thrust](https://github.com/thrustjs/thrust), no seu terminal:
 
 ```bash
 thrust install authentication
@@ -114,7 +114,7 @@ setCanRefreshTokenFn(newFn)
 ```
 
 ## Parâmetros de configuração
-As propriedades abaixo devem ser configuradas no arquivo *config.json* (distribuído juntamente com o ThrustJS):
+As propriedades abaixo devem ser configuradas no arquivo *config.json*:
 
 ``` javascript
 ...

@@ -13,6 +13,8 @@ thrust install authentication
 
 ## Tutorial
 
+Primeiro vamos configurar nosso arquivo de inicialização *startup.js*, nele devemos fazer *require* do *authentication* e adicioná-lo como middleware do bitcode *router*, como mostrado abaixo:
+
 ```javascript
 //Realizamos o require dos bitcodes
 let server = require('http')
@@ -20,11 +22,13 @@ let router = require('router')
 let auth   = require('authentication')
 
 //Adicionamos o middleware de autenticação
-router.addMiddleware(auth.validateAccess)
+router.addMiddleware(auth)
 
 //Iniciamos o servidor
 server.createServer(8778, router)
 ```
+
+Em seguida, devemos utilizar os métodos do *authentication* que criam e destroem uma autenticação, geralmente acontece em um endpoint de login, como mostrado abaixo:
 
 ```javascript
 //Rota de auth

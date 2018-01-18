@@ -69,6 +69,16 @@ var Authentication = function () {
   * Middleware que deve ser usado para ativar o módulo de autenticação
   * @example
   * @file startup.js
+  * @code router.addMiddleware(auth) //Nota: É recomendável que seja o primeiro middleware da aplicação
+  */
+  this.middleware = function (params, request, response) {
+    return this.validateAccess(params, request, response)
+  }
+
+  /**
+  * Middleware que deve ser usado para ativar o módulo de autenticação
+  * @example
+  * @file startup.js
   * @code router.addMiddleware(auth.validateAccess) //Nota: É recomendável que seja o primeiro middleware da aplicação
   */
   this.validateAccess = function (params, request, response) {

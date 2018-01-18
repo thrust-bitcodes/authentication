@@ -14,27 +14,51 @@ thrust install authentication
 ## Tutorial
 
 ```javascript
+//Realizamos o require dos bitcodes
 let server = require('http')
 let router = require('router')
 let auth   = require('authentication')
 
+//Adicionamos o middleware de autenticação
 router.addMiddleware(auth.validateAccess)
 
+//Iniciamos o servidor
 server.createServer(8778, router)
 ```
 
 ```javascript
 //Rota de auth
+
+//Realizamos o require do bitcode de autenticação
 let auth   = require('authentication')
 
+//Implementação do endpoint de login
 function login (params, request, response) {
-  auth.createAuthentication(params, request, response, 1, 'idDoApp', { role: 'admin'})
+
+  //Checamos os parametros no banco ou qualquer outra fonte de dados.
+  //Usamos apenas um if para exemplificação.
+  if (params.name == 'admin' && params.password == 'admin') {
+
+    //Criamos uma autenticação para esse usuário
+    auth.createAuthentication(params, request, response, 1, 'idDoApp', {name: params.nome, role: 'admin'})
+
+    //Respondemos ao client que deu tudo certo.
+    response.json({loginOk: true})
+  } else {
+
+    //Respondemos ao client que o login falhou.
+    response.json({loginOk: false, message: 'Usuário ou senha incorretos.'})
+  }
 }
 
+//Implementação do endpoint de logout
 function logout (params, request, response) {
+
+  //Destruímos a autenticação
   auth.destroyAuthentication(params, request, response)
 }
 
+//Exportamos os endpoints
 exports = {
   login: login,
   logout: logout
@@ -86,14 +110,14 @@ validateAccess(params, request, response)
 *   return true
 * })
 */
-function setCanRefreshTokenFn(newFn)
+setCanRefreshTokenFn(newFn)
 ```
 
 ## Parâmetros de configuração
 As propriedades abaixo devem ser configuradas no arquivo *config.json* (distribuído juntamente com o ThrustJS):
 
 ``` javascript
-"appName": /*String*/,
+...
 "authentication": { /*Configuração do authentication*/
   "notAuthenticatedUrls": /*String or StringArray*/,
   "useSecureAuthentication": /*Boolean (Sould to be True in production)*/,
@@ -132,6 +156,5 @@ Exemplo:
 Acesse também os outros *bitcodes* utilizados no exemplo para melhor entendimento:
 
 - [thrust-bitcodes/http](https://github.com/thrust-bitcodes/http)
-- [thrust-bitcodes/authentication](https://github.com/thrust-bitcodes/authentication)
 - [thrust-bitcodes/router](https://github.com/thrust-bitcodes/router)
 

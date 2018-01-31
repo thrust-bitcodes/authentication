@@ -2,7 +2,7 @@
   "description": "Authentication module",
   "name": "authentication",
   "path": "index.js",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Cleverson Puche & Leandro Schmitt",
   "dependencies": {
     "bitcodes": ["thrust-bitcodes/jwt"],

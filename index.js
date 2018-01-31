@@ -8,6 +8,8 @@
 * Module for authentication and authorization
 */
 var Authentication = function () {
+  var self = this
+
   var jwt = require('thrust-bitcodes/jwt')
 
   var authenticationConfig = getBitcodeConfig('authentication')
@@ -72,7 +74,7 @@ var Authentication = function () {
   * @code router.addMiddleware(auth) //Nota: É recomendável que seja o primeiro middleware da aplicação
   */
   this.middleware = function (params, request, response) {
-    return this.validateAccess(params, request, response)
+    return self.validateAccess(params, request, response)
   }
 
   /**

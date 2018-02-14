@@ -147,7 +147,7 @@ Exemplo:
         "/@auth/activate",
       ],
       "useSecureAuthentication": true,
-      "accessTokenTTL": 300000 // 10 minutos, padrão para todos apps
+      "accessTokenTTL": 300000 // 5 minutos, padrão para todos apps
       "refreshTokenTTL": {
           "central": 28800000 // 8 horas, para o app "central" apenas
       }

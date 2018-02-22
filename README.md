@@ -17,9 +17,9 @@ Primeiro vamos configurar nosso arquivo de inicialização *startup.js*, nele de
 
 ```javascript
 //Realizamos o require dos bitcodes
-let server = require('http')
-let router = require('router')
-let auth   = require('authentication')
+var server = require('http')
+var router = require('router')
+var auth   = require('authentication')
 
 //Adicionamos o middleware de autenticação
 router.addMiddleware(auth)
@@ -34,7 +34,7 @@ Em seguida, devemos utilizar os métodos do *authentication* que criam e destroe
 //Rota de auth
 
 //Realizamos o require do bitcode de autenticação
-let auth   = require('authentication')
+var auth   = require('authentication')
 
 //Implementação do endpoint de login
 function login (params, request, response) {

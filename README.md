@@ -77,8 +77,8 @@ auth.createAuthentication(params, request, response, 1, 'idDoApp', {name: params
 
 //Lendo os valores das propriedades "name" e "role" informadas na criação da autenticação.
 function inserirProduto(params, request, response) {
-  console.log(params.userData.name)
-  console.log(params.userData.role)
+  console.log(request.userData.name)
+  console.log(request.userData.role)
 
   //...
 }

@@ -69,10 +69,10 @@ exports = {
 }
 ```
 
-Note que, ao criar uma autenticação válida, é possível passar, como último parâmetro da função _createAuthentication_ um objeto com dados que podem ser acessados em qualquer _endpoint_, através da propriedade _userData_ no objeto _request_. Vejo abaixo como fazer isso:
+Note que, ao criar uma autenticação válida, é possível passar, como último parâmetro da função _createAuthentication_, um objeto com dados que podem ser acessados em qualquer _endpoint_, através da propriedade _userData_ no objeto _request_. Vejo abaixo como fazer isso:
 
 ```javascript
-//Criando autenticação e definindo os parêmtros "name" e "role" na sessão.
+//Criando autenticação e definindo os parâmetros "name" e "role" na sessão.
 auth.createAuthentication(params, request, response, 1, 'idDoApp', {name: params.nome, role: 'admin'})
 
 //Lendo os valores das propriedades "name" e "role" informadas na criação da autenticação.

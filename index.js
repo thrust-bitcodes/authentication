@@ -199,8 +199,11 @@ var Authentication = function () {
   var setTokenIntoHeader = function (params, request, response, serializedToken, expires) {
     var tknAppName = getTokenName(params, request)
 
-    var cookieStr = tknAppName + '=' + serializedToken + ';HttpOnly;path=/;' + (authenticationConfig('useSecureAuthentication') ? 'secure;' : '') + ';expires=' + new Date(expires).toUTCString()
+    var secure = (authenticationConfig('useSecureAuthentication') ? 'secure;' : '');
+    expires = (expires ? ';expires=' + new Date(expires).toUTCString() : '')
 
+    var cookieStr = tknAppName + '=' + serializedToken + ';HttpOnly;path=/;' + secure + expires
+    
     response.addHeader('Set-Cookie', cookieStr)
   }
 

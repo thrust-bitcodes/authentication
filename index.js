@@ -52,7 +52,7 @@ var Authentication = function () {
       }
     }, true)
 
-    setTokenIntoHeader(params, request, response, tkn, expires)
+    setTokenIntoHeader(params, request, response, tkn)
     print('AUTHENTICATION INFO: Authentication created for user id: ' + userId + ' (' + new Date() + ')')
   }
 
@@ -170,7 +170,7 @@ var Authentication = function () {
     token.exp = new Date().getTime() + getAccessTokenTTL(token.udata.app)
     token.rtexp = new Date().getTime() + getRefreshTokenTTL(token.udata.app)
 
-    setTokenIntoHeader(params, request, response, jwt.serialize(token, true), token.exp)
+    setTokenIntoHeader(params, request, response, jwt.serialize(token, true))
   }
 
   var getRefreshTokenTTL = function (app) {
@@ -196,11 +196,11 @@ var Authentication = function () {
     return JSON.parse(deserializedToken)
   }
 
-  var setTokenIntoHeader = function (params, request, response, serializedToken, expires) {
+  var setTokenIntoHeader = function (params, request, response, serializedToken) {
     var tknAppName = getTokenName(params, request)
 
     var secure = (authenticationConfig('useSecureAuthentication') ? 'secure;' : '');
-    expires = (expires ? ';expires=' + new Date(expires).toUTCString() : '')
+    expires = ';expires=' + new Date(new Date().getFullYear() + 5, 00, 01).toUTCString();
 
     var cookieStr = tknAppName + '=' + serializedToken + ';HttpOnly;path=/;' + secure + expires
     
